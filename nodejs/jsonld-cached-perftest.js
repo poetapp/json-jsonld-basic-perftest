@@ -1,9 +1,7 @@
 var fs = require('fs');
 var jsonld = require('jsonld');
 
-var CONTEXTS = {
-    "type": "@type",
-    "id": "@id",
+const CONTEXTS = {
     'http://schema.org/additionalType': { '@type': '@id' },
     'http://schema.org/author': { '@type': '@id' },
     'http://schema.org/contentUrl': { '@type': '@id' },
@@ -19,7 +17,11 @@ var CONTEXTS = {
   }
 ;
 
+
+
 documentLoader = (url, callback) => {
+  const nodeDocumentLoader = jsonld.documentLoaders.node();
+  console.log(`documentLOADER called for ${url}`)
   if(url in CONTEXTS) {
     return callback(
       null, {
@@ -27,10 +29,11 @@ documentLoader = (url, callback) => {
         document: CONTEXTS[url], // this is the actual document that was loaded
         documentUrl: url // this is the actual context URL after redirects
       });
-  } else {
-    throw new Error('invalid context: ' + url);
   }
-};
+  nodeDocumentLoader(url, callback)
+}
+
+jsonld.documentLoader = documentLoader
 
 var person = fs.readFileSync('../data/person.jsonld', 'utf8');
 var jsonPerson;
@@ -39,8 +42,9 @@ var result = [];
 const runIt = async () => {
   for (let i = 0; i < 100000; i++) {
     jsonPerson = JSON.parse(person);
-    result.push(await jsonld.canonize(await jsonld.expand(jsonPerson, { documentLoader })))
+    result.push(await jsonld.canonize(jsonPerson))
   }
+  // console.log(result)
 }
 
 runIt()

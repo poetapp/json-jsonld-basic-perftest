@@ -8,7 +8,7 @@ var result = [];
 const runIt = async () => {
   for (let i = 0; i < 100000; i++) {
     jsonPerson = JSON.parse(person);
-    result.push(await jsonld.canonize(await jsonld.expand(jsonPerson)))
+    result.push(await jsonld.canonize(jsonPerson))
   }
 }
 
