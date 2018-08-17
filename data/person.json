@@ -1,0 +1,17 @@
+{
+  "publicKey": "02badf4650ba545608242c2d303d587cf4f778ae3cf2b3ef99fbda37555a400fd2",
+  "type": "Work",
+  "created": "2017-11-13T15:00:00.000Z",
+  "attributes": {
+    "name": "The Raven",
+    "author": "Edgar Allan Poe",
+    "tags": "poem",
+    "dateCreated": "",
+    "datePublished": "1845-01-29T03:00:00.000Z",
+    "text": "Once upon a midnight dreary...",
+    "moreDetail": {
+      "c": "cText",
+      "a": "aText"
+    }
+  }
+}

@@ -1,19 +1,16 @@
-var async = require('async');
 var fs = require('fs');
 var jsonld = require('jsonld');
 
-var count = 0;
 var person = fs.readFileSync('../data/person.jsonld', 'utf8');
 var jsonPerson;
 var result = [];
-async.whilst(
-  function() { return count < 1000; },
-  function(callback) {
-    count++;
-    jsonPerson = JSON.parse(person);
-    jsonld.compact(jsonPerson, 'http://schema.org/', function(err, compacted) {
-      result.push(compacted);
-      callback();
-    });
-  });
 
+const runIt = async () => {
+  for (let i = 0; i < 100000; i++) {
+    jsonPerson = JSON.parse(person);
+    result.push(await jsonld.canonize(await jsonld.expand(jsonPerson)))
+  }
+}
+
+runIt()
+  .catch(e => console.error(e))

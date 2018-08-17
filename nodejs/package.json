@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A basic performance test suite for JSON and JSON-LD",
   "dependencies": {
-    "async": "^2.0.0-rc.3",
-    "jsonld": "^0.4.9"
+    "async": "^2.1",
+    "jsonld": "^1.0.2"
   }
 }
