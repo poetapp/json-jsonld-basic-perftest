@@ -44,7 +44,6 @@ const runIt = async () => {
     jsonPerson = JSON.parse(person);
     result.push(await jsonld.canonize(jsonPerson))
   }
-  // console.log(result)
 }
 
 runIt()
