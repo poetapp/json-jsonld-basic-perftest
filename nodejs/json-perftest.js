@@ -10,11 +10,11 @@ const canonizeAttributes = attributes => {
     .map(({key, value}) => ({key: key.toLowerCase(), value}))
     .sort((a, b) => a.key.localeCompare(b.key))
     .map((obj) => {
-      k = obj['key']
-      v = obj.value
-      const r = {}
-      r[k] = v
-      return r
+      const k = obj.key
+      const v = (typeof obj.value == 'object') ? canonizeAttributes(obj.value) : obj.value
+      const r1 = {}
+      r1[k] = v
+      return r1
     })
   return r
 }
